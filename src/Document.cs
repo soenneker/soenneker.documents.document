@@ -1,6 +1,5 @@
 ﻿using System;
 using System.ComponentModel.DataAnnotations;
-using System.Linq;
 using System.Text.Json.Serialization;
 using Newtonsoft.Json;
 using Soenneker.Documents.Document.Abstract;
@@ -27,29 +26,10 @@ public abstract class Document : IDocument
         }
         set
         {
-            if (value.IsNullOrWhiteSpace())
-                return;
+            (string? partitionKey, string? documentId) = value.ToSplitId();
 
-            if (value.Contains(':'))
-            {
-                string[] idSplit = value.Split(':');
-
-                if (idSplit.Length == 2)
-                {
-                    PartitionKey = idSplit[0];
-                    DocumentId = idSplit[1];
-                }
-                else
-                {
-                    // These are for combined ids.. essentially the document id is the last in the string and everything before that is the partition key
-                    PartitionKey = string.Join(':', idSplit, 0, idSplit.Length - 1);
-                    DocumentId = idSplit[^1];
-                }
-                return;
-            }
-
-            DocumentId = value;
-            PartitionKey = value;
+            DocumentId = documentId;
+            PartitionKey = partitionKey;
         }
     }
 
