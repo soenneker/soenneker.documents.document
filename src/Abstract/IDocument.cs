@@ -14,8 +14,9 @@ namespace Soenneker.Documents.Document.Abstract;
 public interface IDocument
 {
     /// <summary>
-    /// This is unused by CosmosDb, is for internal identification <para/>
-    /// PartitionKey:DocumentId construction... unless DocumentId = PartitionId (then it's only one id)
+    /// This is unused by CosmosDb, it is for internal identification <para/>
+    /// PartitionKey:DocumentId construction... unless DocumentId = PartitionId (then it's only one id). <para/>
+    /// This also supports 'combined ids'. For example, a partition key could be guid1:guid2, and the document id is guid3. It would return guid1:guid2:guid3.
     /// </summary>
     /// <remarks>
     /// During GET it builds the return value from joining PartitionKey and DocumentId (PartitionKey:DocumentId) <para/>
@@ -36,6 +37,7 @@ public interface IDocument
     /// <summary>
     /// Usage of the PartitionKey may be different depending on the document/entity/container. <para/>
     /// Maps to the "partitionKey" json property within the document. <para/>
+    /// Supports 'combined ids' with colon between the parts.
     /// Overridable.
     /// </summary>
     [Required, JsonPropertyName("partitionKey")]
