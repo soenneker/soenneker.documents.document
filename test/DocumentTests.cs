@@ -1,4 +1,5 @@
 ﻿using FluentAssertions;
+using Mapster;
 using Soenneker.Tests.Unit;
 using Soenneker.Utils.String;
 using Xunit;
@@ -39,5 +40,13 @@ public class DocumentTests : UnitTest
 
         document.PartitionKey.Should().Be($"{guid2}:{guid3}");
         document.DocumentId.Should().Be(guid1);
+    }
+
+    [Fact]
+    public void Adaption_from_entity_should_not_throw_with_no_id_set()
+    {
+        var entity = new TestEntity();
+        var document = entity.Adapt<TestDocument>();
+        document.Should().NotBeNull();
     }
 }

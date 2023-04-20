@@ -26,10 +26,34 @@ public abstract class Document : IDocument
         }
         set
         {
-            (string? partitionKey, string? documentId) = value.ToSplitId();
+            // This is for the situation in which adapting doesn't yet have an Id
+            if (value.IsNullOrWhiteSpace())
+                return;
 
-            DocumentId = documentId;
-            PartitionKey = partitionKey;
+            if (!value.Contains(':'))
+            {
+                PartitionKey = value;
+                DocumentId = value;
+                return;
+            }
+            
+            string[] idParts = value.Split(':');
+
+            switch (idParts.Length)
+            {
+                case 1:
+                    PartitionKey = idParts[0];
+                    DocumentId = idParts[0];
+                    break;
+                case 2:
+                    PartitionKey = idParts[0];
+                    DocumentId = idParts[1];
+                    break;
+                default:
+                    PartitionKey = string.Join(':', idParts, 0, idParts.Length - 1);
+                    DocumentId = idParts[^1];
+                    break;
+            }
         }
     }
 
