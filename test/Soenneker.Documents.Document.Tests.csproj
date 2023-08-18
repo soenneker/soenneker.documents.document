@@ -10,7 +10,7 @@
     <ItemGroup>
         <PackageReference Include="Mapster" Version="7.3.0" />
         <PackageReference Include="Microsoft.NET.Test.Sdk" Version="17.7.1" />
-        <PackageReference Include="Soenneker.Utils.String" Version="1.0.103" />
+        <PackageReference Include="Soenneker.Utils.String" Version="1.0.106" />
         <PackageReference Include="xunit.runner.visualstudio" Version="2.5.0">
             <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
             <PrivateAssets>all</PrivateAssets>
@@ -19,7 +19,7 @@
             <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
             <PrivateAssets>all</PrivateAssets>
         </PackageReference>
-        <PackageReference Include="Soenneker.Tests.Unit" Version="1.0.93" />
+        <PackageReference Include="Soenneker.Tests.Unit" Version="1.0.95" />
     </ItemGroup>
 
     <ItemGroup>
