@@ -8,5 +8,5 @@
 ## Installation
 
 ```
-Install-Package Soenneker.Documents.Document
+dotnet add package Soenneker.Documents.Document
 ```
