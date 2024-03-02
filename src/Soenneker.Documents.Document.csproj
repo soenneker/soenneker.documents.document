@@ -43,6 +43,6 @@
 
         <PackageReference Include="Soenneker.Entities.Entity" Version="2.1.151" />
 
-        <PackageReference Include="Soenneker.Extensions.String" Version="2.1.119" />
+        <PackageReference Include="Soenneker.Extensions.String" Version="2.1.120" />
     </ItemGroup>
 </Project>
