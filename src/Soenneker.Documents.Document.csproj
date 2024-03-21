@@ -41,7 +41,7 @@
 
         <PackageReference Include="Newtonsoft.Json" Version="13.0.3" />
 
-        <PackageReference Include="Soenneker.Entities.Entity" Version="2.1.176" />
+        <PackageReference Include="Soenneker.Entities.Entity" Version="2.1.177" />
 
         <PackageReference Include="Soenneker.Extensions.String" Version="2.1.131" />
     </ItemGroup>
