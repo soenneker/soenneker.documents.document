@@ -1,4 +1,4 @@
-﻿using FluentAssertions;
+﻿using AwesomeAssertions;
 using Mapster;
 using Soenneker.Tests.Unit;
 using Soenneker.Utils.String;
