@@ -152,7 +152,7 @@ public class DocumentTests : UnitTest
                 "x:y:z:w"
             };
 
-        foreach (var input in inputs)
+        foreach (string input in inputs)
         {
             var doc = new TestDocument();
             doc.Id = input;
