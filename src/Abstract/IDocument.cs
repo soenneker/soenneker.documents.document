@@ -47,10 +47,10 @@ public interface IDocument
     /// <inheritdoc cref="IEntity.CreatedAt"/>
     [Required, JsonPropertyName("createdAt")]
     [JsonProperty("createdAt")]
-    DateTime CreatedAt { get; set; }
+    DateTimeOffset CreatedAt { get; set; }
 
     /// <inheritdoc cref="IEntity.ModifiedAt"/>
     [JsonPropertyName("modifiedAt")]
     [JsonProperty("modifiedAt")]
-    DateTime? ModifiedAt { get; set; }
+    DateTimeOffset? ModifiedAt { get; set; }
 }
