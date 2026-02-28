@@ -13,7 +13,7 @@
     </PropertyGroup>
 
     <ItemGroup>
-        <PackageReference Include="Mapster" Version="7.4.0" /><PackageReference Include="Soenneker.Utils.String" Version="4.0.2870" /><PackageReference Include="Soenneker.Tests.Unit" Version="4.0.1037" />
+        <PackageReference Include="Mapster" Version="7.4.0" /><PackageReference Include="Soenneker.Utils.String" Version="4.0.2871" /><PackageReference Include="Soenneker.Tests.Unit" Version="4.0.1037" />
     <PackageReference Include="xUnit.v3" Version="3.2.2" /></ItemGroup>
 
     <ItemGroup>
