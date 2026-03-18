@@ -13,28 +13,27 @@ public abstract class Document : IDocument
     private const char _colon = ':';
 
     private string? _idCache;
-    private string _documentId = string.Empty;
-    private string _partitionKey = string.Empty;
+    private string? _documentId;
+    private string? _partitionKey;
 
     [System.Text.Json.Serialization.JsonIgnore]
     [Newtonsoft.Json.JsonIgnore]
-    public string Id
+    public string? Id
     {
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
         get
         {
             string? cached = _idCache;
-
             if (cached is not null)
                 return cached;
 
-            string pk = _partitionKey;
-            string id = _documentId;
+            string? pk = _partitionKey;
+            string? id = _documentId;
 
-            if (pk.Length == 0)
+            if (string.IsNullOrEmpty(pk))
                 return _idCache = id;
 
-            if (id.Length == 0)
+            if (string.IsNullOrEmpty(id))
                 return _idCache = pk;
 
             if (ReferenceEquals(pk, id) || string.Equals(pk, id, StringComparison.Ordinal))
@@ -55,7 +54,7 @@ public abstract class Document : IDocument
                 return;
 
             string? cached = _idCache;
-            if (ReferenceEquals(cached, value) || string.Equals(cached, value, StringComparison.Ordinal))
+            if (cached == value)
                 return;
 
             ReadOnlySpan<char> span = value.AsSpan();
@@ -63,10 +62,10 @@ public abstract class Document : IDocument
 
             if (lastColon < 0)
             {
-                if (!string.Equals(_partitionKey, value, StringComparison.Ordinal))
+                if (_partitionKey != value)
                     _partitionKey = value;
 
-                if (!string.Equals(_documentId, value, StringComparison.Ordinal))
+                if (_documentId != value)
                     _documentId = value;
 
                 _idCache = value;
@@ -76,8 +75,8 @@ public abstract class Document : IDocument
             ReadOnlySpan<char> pkSpan = span[..lastColon];
             ReadOnlySpan<char> idSpan = span[(lastColon + 1)..];
 
-            bool pkMatches = pkSpan.SequenceEqual(_partitionKey.AsSpan());
-            bool idMatches = idSpan.SequenceEqual(_documentId.AsSpan());
+            bool pkMatches = pkSpan.SequenceEqual((_partitionKey ?? string.Empty).AsSpan());
+            bool idMatches = idSpan.SequenceEqual((_documentId ?? string.Empty).AsSpan());
 
             if (!pkMatches)
                 _partitionKey = pkSpan.Length == 0 ? string.Empty : new string(pkSpan);
@@ -92,16 +91,14 @@ public abstract class Document : IDocument
     [Required]
     [JsonPropertyName("id")]
     [JsonProperty("id")]
-    public string DocumentId
+    public string? DocumentId
     {
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
         get => _documentId;
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
         set
         {
-            value ??= string.Empty;
-
-            if (string.Equals(_documentId, value, StringComparison.Ordinal))
+            if (_documentId == value)
                 return;
 
             _documentId = value;
@@ -112,16 +109,14 @@ public abstract class Document : IDocument
     [Required]
     [JsonPropertyName("partitionKey")]
     [JsonProperty("partitionKey")]
-    public string PartitionKey
+    public string? PartitionKey
     {
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
         get => _partitionKey;
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
         set
         {
-            value ??= string.Empty;
-
-            if (string.Equals(_partitionKey, value, StringComparison.Ordinal))
+            if (_partitionKey == value)
                 return;
 
             _partitionKey = value;
