@@ -1,13 +1,12 @@
-﻿using AwesomeAssertions;
+using AwesomeAssertions;
 using Soenneker.Tests.Unit;
 using Soenneker.Utils.String;
-using Xunit;
 
 namespace Soenneker.Documents.Document.Tests;
 
 public class DocumentTests : UnitTest
 {
-    [Fact]
+    [Test]
     public void Id_assembly_with_combined_partitionKey_should_give_correct_result()
     {
         var guid1 = Faker.Random.Guid().ToString();
@@ -23,7 +22,7 @@ public class DocumentTests : UnitTest
         document.Id.Should().Be($"{guid2}:{guid3}:{guid1}");
     }
 
-    [Fact]
+    [Test]
     public void Id_disassembly_with_combined_partitionKey_should_give_correct_result()
     {
         var guid1 = Faker.Random.Guid().ToString();
@@ -41,7 +40,7 @@ public class DocumentTests : UnitTest
         document.DocumentId.Should().Be(guid1);
     }
 
-    [Fact]
+    [Test]
     public void Adaption_from_entity_should_not_throw_with_no_id_set()
     {
         var entity = new TestEntity();
@@ -49,7 +48,7 @@ public class DocumentTests : UnitTest
         document.Should().NotBeNull();
     }
 
-    [Fact]
+    [Test]
     public void GetId_WhenDocumentIdEqualsPartitionKey_ReturnsDocumentIdDirectly()
     {
         var doc = new TestDocument
@@ -63,7 +62,7 @@ public class DocumentTests : UnitTest
         id.Should().Be("sameValue");
     }
 
-    [Fact]
+    [Test]
     public void GetId_WhenPartitionKeyAndDocumentIdDiffer_ReturnsPartitionKeyColonDocumentId()
     {
         var doc = new TestDocument
@@ -77,7 +76,7 @@ public class DocumentTests : UnitTest
         id.Should().Be("pkValue:docValue");
     }
 
-    [Fact]
+    [Test]
     public void SetId_NullOrWhitespace_DoesNotChangeExistingKeys()
     {
         var doc = new TestDocument
@@ -102,7 +101,7 @@ public class DocumentTests : UnitTest
         doc.DocumentId.Should().Be("initialID");
     }
 
-    [Fact]
+    [Test]
     public void SetId_NoColon_SetsBothPartitionAndDocumentToFullValue()
     {
         var doc = new TestDocument();
@@ -115,7 +114,7 @@ public class DocumentTests : UnitTest
         doc.Id.Should().Be("onlyValue");
     }
 
-    [Fact]
+    [Test]
     public void SetId_SingleColon_SplitsAtThatPoint()
     {
         var doc = new TestDocument();
@@ -128,7 +127,7 @@ public class DocumentTests : UnitTest
         doc.Id.Should().Be("left:right");
     }
 
-    [Fact]
+    [Test]
     public void SetId_MultipleColons_PartitionIsEverythingBeforeLastColon()
     {
         var doc = new TestDocument();
@@ -141,7 +140,7 @@ public class DocumentTests : UnitTest
         doc.Id.Should().Be("a:b:c");
     }
 
-    [Fact]
+    [Test]
     public void Setter_ThenGetter_RetainsRoundTripBehavior()
     {
         var inputs = new[]
@@ -161,7 +160,7 @@ public class DocumentTests : UnitTest
         }
     }
 
-    [Fact]
+    [Test]
     public void InitialNullKeys_SetIdNull_LeavesKeysNull()
     {
         var doc = new TestDocument();
