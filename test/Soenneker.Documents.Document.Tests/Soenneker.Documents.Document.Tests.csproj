@@ -13,7 +13,7 @@
         </PackageReference>
         <PackageReference Include="Soenneker.Utils.String" Version="4.0.2989" />
         <PackageReference Include="Soenneker.Tests.Unit" Version="4.0.1135" />
-        <PackageReference Include="TUnit" Version="1.41.0" />
+        <PackageReference Include="TUnit" Version="1.43.2" />
     </ItemGroup>
 
     <ItemGroup>
