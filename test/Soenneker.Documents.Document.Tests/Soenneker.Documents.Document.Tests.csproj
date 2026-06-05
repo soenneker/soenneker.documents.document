@@ -11,9 +11,9 @@
             <PrivateAssets>all</PrivateAssets>
             <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
         </PackageReference>
-        <PackageReference Include="Soenneker.Utils.String" Version="4.0.2997" />
-        <PackageReference Include="Soenneker.Tests.Unit" Version="4.0.1152" />
-        <PackageReference Include="TUnit" Version="1.48.0" />
+        <PackageReference Include="Soenneker.Utils.String" Version="4.0.2999" />
+        <PackageReference Include="Soenneker.Tests.Unit" Version="4.0.1153" />
+        <PackageReference Include="TUnit" Version="1.48.6" />
     </ItemGroup>
 
     <ItemGroup>
