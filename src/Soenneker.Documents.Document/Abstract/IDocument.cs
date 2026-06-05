@@ -44,12 +44,16 @@ public interface IDocument
     [JsonProperty("partitionKey")]
     string PartitionKey { get; set; }
 
-    /// <inheritdoc cref="IEntity.CreatedAt"/>
+    /// <summary>
+    /// Gets or sets created at.
+    /// </summary>
     [Required, JsonPropertyName("createdAt")]
     [JsonProperty("createdAt")]
     DateTimeOffset CreatedAt { get; set; }
 
-    /// <inheritdoc cref="IEntity.ModifiedAt"/>
+    /// <summary>
+    /// Gets or sets modified at.
+    /// </summary>
     [JsonPropertyName("modifiedAt")]
     [JsonProperty("modifiedAt")]
     DateTimeOffset? ModifiedAt { get; set; }
