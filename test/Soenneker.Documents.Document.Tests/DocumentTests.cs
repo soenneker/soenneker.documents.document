@@ -58,7 +58,7 @@ public class DocumentTests : UnitTest
         };
 
         // Since they match, no allocation beyond returning DocumentId
-        string id = doc.Id;
+        string? id = doc.Id;
         id.Should().Be("sameValue");
     }
 
@@ -72,7 +72,7 @@ public class DocumentTests : UnitTest
         };
 
         // Expect "pkValue:docValue"
-        string id = doc.Id;
+        string? id = doc.Id;
         id.Should().Be("pkValue:docValue");
     }
 

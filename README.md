@@ -5,28 +5,53 @@
 
 # Soenneker.Documents.Document
 
-The base document type providing a building block for storage objects Documents may or may not have their own separate containers. They are not tied to only one repository. A parent document may have children documents exist on them.
+Provides a base document model with storage identity, partition, and timestamp fields.
 
-## Install
+## Installation
 
 ```bash
 dotnet add package Soenneker.Documents.Document
 ```
 
-## What you get
+## Define a document
 
-- `IDocument` — The base document type providing a building block for storage objects Documents may or may not have their own separate containers. They are not tied to only one repository. A parent document may have children documents exist on them.
+```csharp
+using Soenneker.Documents.Document;
 
-## API at a glance
+public sealed class CustomerDocument : Document
+{
+    public string Name { get; set; } = null!;
+}
 
-| API | What it does | Result / important behavior |
-| --- | --- | --- |
-| `IDocument.Id` | This is unused by CosmosDb, it is for internal identification PartitionKey:DocumentId construction... unless DocumentId = PartitionId (then it's only one id). This also supports 'combined ids'. For example, a partition key could be guid1:guid2, and the document id is guid3. It would return guid1:guid2:guid3. | During GET it builds the return value from joining PartitionKey and DocumentId (PartitionKey:DocumentId) During SET it sets the DocumentId and PartitionKey of the document. |
-| `IDocument.DocumentId` | Maps/serializes to the "id" json property within the document Overridable. | Maps/serializes to the "id" json property within the document Overridable. |
-| `IDocument.PartitionKey` | Usage of the PartitionKey may be different depending on the document/entity/container. Maps to the "partitionKey" json property within the document. Supports 'combined ids' with colon between the parts. Overridable. | Usage of the PartitionKey may be different depending on the document/entity/container. Maps to the "partitionKey" json property within the document. Supports 'combined ids' with colon between the parts. Overridable. |
-| `IDocument.CreatedAt` | Gets or sets created at. | Gets or sets created at. |
-| `IDocument.ModifiedAt` | Gets or sets modified at. | Gets or sets modified at. |
+var customer = new CustomerDocument
+{
+    DocumentId = "customer-42",
+    PartitionKey = "tenant-7",
+    CreatedAt = DateTimeOffset.UtcNow,
+    Name = "Ada Lovelace"
+};
 
-## Important behavior
+string? internalId = customer.Id; // tenant-7:customer-42
+```
 
-- `IDocument.Id`: During GET it builds the return value from joining PartitionKey and DocumentId (PartitionKey:DocumentId) During SET it sets the DocumentId and PartitionKey of the document.
+`DocumentId` serializes as `id`; `PartitionKey` serializes as `partitionKey`. `CreatedAt` and `ModifiedAt` serialize as `createdAt` and `modifiedAt`. These names are declared for both System.Text.Json and Newtonsoft.Json.
+
+`Id` is an internal convenience value and is ignored by both serializers. Its behavior is:
+
+- If one key is missing, it returns the other.
+- If both keys are equal, it returns that value once.
+- If the keys differ, it returns `PartitionKey:DocumentId`.
+- Assigning a value containing colons splits at the last colon.
+- Assigning a value without a colon sets both `PartitionKey` and `DocumentId` to that value.
+- Assigning null, empty, or whitespace does nothing.
+
+Because the format has no escaping, `DocumentId` should not contain a colon when `Id` must round-trip through its setter. A partition key may contain colons because parsing reserves the final segment for `DocumentId`.
+
+```csharp
+customer.Id = "tenant:region:customer-42";
+
+// PartitionKey == "tenant:region"
+// DocumentId == "customer-42"
+```
+
+New instances do not automatically receive identifiers or timestamps. The `[Required]` attributes provide validation metadata but do not initialize values or make mutable instances thread-safe; populate and validate documents before persistence.

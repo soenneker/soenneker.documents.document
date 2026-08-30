@@ -7,7 +7,6 @@ using System.Text.Json.Serialization;
 
 namespace Soenneker.Documents.Document;
 
-/// <inheritdoc cref="IDocument"/>
 public abstract class Document : IDocument
 {
     private const char _colon = ':';
