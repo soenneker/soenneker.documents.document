@@ -7,13 +7,13 @@
     </PropertyGroup>
 
     <ItemGroup>
-        <PackageReference Include="Soenneker.Gen.Adapt" Version="4.0.89">
+        <PackageReference Include="Soenneker.Gen.Adapt" Version="4.0.90">
             <PrivateAssets>all</PrivateAssets>
             <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
         </PackageReference>
-        <PackageReference Include="Soenneker.Utils.String" Version="4.0.3191" />
+        <PackageReference Include="Soenneker.Utils.String" Version="4.0.3194" />
         <PackageReference Include="Soenneker.Tests.Unit" Version="4.0.1310" />
-        <PackageReference Include="TUnit" Version="1.66.16" />
+        <PackageReference Include="TUnit" Version="1.66.27" />
     </ItemGroup>
 
     <ItemGroup>
