@@ -1,8 +1,7 @@
-﻿using System;
+using System;
 using System.ComponentModel.DataAnnotations;
 using System.Text.Json.Serialization;
 using Newtonsoft.Json;
-using Soenneker.Entities.Entity.Abstract;
 
 namespace Soenneker.Documents.Document.Abstract;
 
