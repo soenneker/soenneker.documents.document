@@ -1,5 +1,4 @@
-﻿using Newtonsoft.Json;
-using Soenneker.Documents.Document.Abstract;
+﻿using Soenneker.Documents.Document.Abstract;
 using System;
 using System.ComponentModel.DataAnnotations;
 using System.Runtime.CompilerServices;
@@ -17,7 +16,6 @@ public abstract class Document : IDocument
     private string? _partitionKey;
 
     [System.Text.Json.Serialization.JsonIgnore]
-    [Newtonsoft.Json.JsonIgnore]
     public string? Id
     {
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
@@ -90,7 +88,6 @@ public abstract class Document : IDocument
 
     [Required]
     [JsonPropertyName("id")]
-    [JsonProperty("id")]
     public string? DocumentId
     {
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
@@ -108,7 +105,6 @@ public abstract class Document : IDocument
 
     [Required]
     [JsonPropertyName("partitionKey")]
-    [JsonProperty("partitionKey")]
     public string? PartitionKey
     {
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
@@ -126,10 +122,8 @@ public abstract class Document : IDocument
 
     [Required]
     [JsonPropertyName("createdAt")]
-    [JsonProperty("createdAt")]
     public DateTimeOffset CreatedAt { get; set; }
 
     [JsonPropertyName("modifiedAt")]
-    [JsonProperty("modifiedAt")]
     public DateTimeOffset? ModifiedAt { get; set; }
 }

@@ -34,9 +34,9 @@ var customer = new CustomerDocument
 string? internalId = customer.Id; // tenant-7:customer-42
 ```
 
-`DocumentId` serializes as `id`; `PartitionKey` serializes as `partitionKey`. `CreatedAt` and `ModifiedAt` serialize as `createdAt` and `modifiedAt`. These names are declared for both System.Text.Json and Newtonsoft.Json.
+`DocumentId` serializes as `id`; `PartitionKey` serializes as `partitionKey`. `CreatedAt` and `ModifiedAt` serialize as `createdAt` and `modifiedAt`. These names are declared for System.Text.Json.
 
-`Id` is an internal convenience value and is ignored by both serializers. Its behavior is:
+`Id` is an internal convenience value and is ignored by System.Text.Json. Its behavior is:
 
 - If one key is missing, it returns the other.
 - If both keys are equal, it returns that value once.
