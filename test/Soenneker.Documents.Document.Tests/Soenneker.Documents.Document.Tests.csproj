@@ -12,7 +12,7 @@
             <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
         </PackageReference>
         <PackageReference Include="Soenneker.Utils.String" Version="4.0.3252" />
-        <PackageReference Include="Soenneker.Tests.Unit" Version="4.0.1361" />
+        <PackageReference Include="Soenneker.Tests.Unit" Version="4.0.1362" />
         <PackageReference Include="TUnit" Version="1.73.19" />
     </ItemGroup>
 
